@@ -1,0 +1,15 @@
+language: julia
+os:
+  - linux
+  - osx
+julia:
+  - 0.7
+  - 1.0
+  - 1.1
+  - nightly
+
+after_success:
+  # push coverage results to Coveralls
+  - julia -e 'import Pkg; cd(Pkg.dir("TenPuzzle")); Pkg.add("Coverage"); using Coverage; Coveralls.submit(Coveralls.process_folder())'
+  # push coverage results to Codecov
+  - julia -e 'import Pkg; cd(Pkg.dir("TenPuzzle")); Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())'
